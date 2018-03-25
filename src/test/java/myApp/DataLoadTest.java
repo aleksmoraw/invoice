@@ -6,7 +6,7 @@ import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.table.Table;
 
 import java.io.File;
-import java.util.HashMap;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 public class DataLoadTest {
 
-    private static String pathToFile = "/home/ola/Pobrane/fakt2017.ods";
-    private static File file = new File (pathToFile);
+    private final static String pathToFile = "/Users/aleksandramorawska/Downloads/fakt2017.ods";
+    private final static File file = new File (pathToFile);
 
-    DataLoad dataLoad = new DataLoad();
+    private DataLoad dataLoad = new DataLoad();
 
     @Test
     public void isFileIsCorrectFind () {
@@ -39,9 +39,9 @@ public class DataLoadTest {
     public void isCellsAreCorrectLoad () {
         try {
             Table table = SpreadsheetDocument.loadDocument(file).getSheetByIndex(1);
-            HashMap<String,String> sut = dataLoad.loadCellsIntoMap(table);
-            assertTrue(sut.containsValue("1/2017"));
-            assertTrue(sut.containsKey("NIP"));
+            List<String> sut = dataLoad.loadCellsIntoArray(table);
+            assertTrue(sut.get(5).equals("2017-04-11"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

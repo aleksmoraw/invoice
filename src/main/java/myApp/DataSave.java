@@ -13,10 +13,10 @@ public class DataSave {
 
     public void saveFile(String filePath, List<String> invoiceDetailsList) {
 
-        try {
-            File file = new File(filePath);
-            SpreadsheetDocument spreadsheetDocument;
+        File file = new File(filePath);
+        SpreadsheetDocument spreadsheetDocument;
 
+        try {
             if(file.exists()) {
                 spreadsheetDocument = SpreadsheetDocument.loadDocument(filePath);
                 Table table = spreadsheetDocument.getSheetByIndex(0);
